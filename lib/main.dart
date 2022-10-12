@@ -1,67 +1,126 @@
 import 'package:flutter/material.dart';
 
-void main() {
+main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomePage(key: key),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+class HomePage extends StatefulWidget {
+  HomePage({Key? key}) : super(key: key);
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+class _HomePageState extends State<HomePage> {
+  int count = 0;
 
-  void _incrementCounter() {
+  void decrement() {
     setState(() {
-      _counter++;
+      count--;
     });
+    print("Contagem: $count");
   }
+
+  void increment() {
+    setState(() {
+      count++;
+    });
+    print("Contagem: $count");
+  }
+
+  bool get isEmpity => count == 0;
+  bool get isFull => count == 20;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      backgroundColor: Colors.blueAccent.shade100,
+      body: myWidget(),
+    );
+  }
+
+  Widget myWidget() {
+    return Container(
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/images/image.jpg'),
+          fit: BoxFit.cover,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            isFull ? "Lotado" : "Pode Entrar",
+            style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.w700,
+              color: isFull ? Colors.red : Colors.green,
+            ),
+          ),
+          const SizedBox(height: 32),
+          Text(
+            count.toString(),
+            style: const TextStyle(
+              fontSize: 100,
+              fontWeight: FontWeight.w700,
+              color: Colors.white,
+            ),
+          ),
+          const SizedBox(height: 32),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor:
+                      isEmpity ? Colors.white.withOpacity(0.2) : Colors.white,
+                  fixedSize: const Size(100, 100),
+                  primary: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
+                onPressed: isEmpity ? null : decrement,
+                child: const Text(
+                  'Saiu',
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ),
+              ),
+              const SizedBox(width: 32),
+              TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor:
+                      isFull ? Colors.white.withOpacity(0.2) : Colors.white,
+                  fixedSize: const Size(100, 100),
+                  primary: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                ),
+                onPressed: () {
+                  return count >= 20 ? null : increment();
+                },
+                child: const Text(
+                  'Entrar',
+                  style: TextStyle(color: Colors.black, fontSize: 16),
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
