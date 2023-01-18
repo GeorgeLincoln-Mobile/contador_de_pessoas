@@ -1,16 +1,8 @@
 # contador_de_pessoas
 
-A new Flutter project.
+Pesando que na época da pandemia se tornou necessário saber a quantidade de pessoas em um estabelecimento, fiz esse app bem limpo e simples que consegue suprir essa necessidade.
 
-## Getting Started
+Thinking that at the time of the pandemic it became necessary to know the number of people in an establishment, I made this very clean and simple app that manages to meet this need.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+![image](https://user-images.githubusercontent.com/115656745/213258396-7a71ae35-1be2-4795-806d-6b6229ce0824.png)
